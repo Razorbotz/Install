@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Create folder directory of robot
+mkdir SoftwareDevelopment
 mkdir SoftwareDevelopment/ROS2
 cd SoftwareDevelopment/ROS2
 git init
@@ -14,8 +15,8 @@ git remote add origin https://github.com/Razorbotz/CPP
 git pull origin master
 cd ../..
 
-mv /ctre /usr/local/include
-mv /lib /usr/local/lib
+sudo mv /ctre /usr/local/include
+sudo mv /lib /usr/local/lib
 
 # Install ROS2
 locale
