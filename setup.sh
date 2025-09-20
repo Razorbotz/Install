@@ -15,8 +15,8 @@ git remote add origin https://github.com/Razorbotz/CPP
 git pull origin master
 cd ../..
 
-sudo mv /ctre /usr/local/include
-sudo mv /lib /usr/local/lib
+sudo mv ./ctre /usr/local/include
+sudo mv ./lib/* /usr/local/lib/
 
 # Install ROS2
 locale
