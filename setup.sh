@@ -16,7 +16,7 @@ git pull origin master
 cd ../..
 
 sudo mv ./ctre /usr/local/include
-#sudo mv ./lib/* /usr/local/lib/
+sudo mv ./lib/x86_64/* /usr/local/lib/
 
 # Install ROS2
 locale
