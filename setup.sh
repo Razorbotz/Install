@@ -6,9 +6,16 @@ cd SoftwareDevelopment/ROS2
 git init
 git remote add origin https://github.com/Razorbotz/ROS2
 git pull origin master
+cd ..
+mkdir C++
+cd C++
+git init
+git remote add origin https://github.com/Razorbotz/CPP
+git pull origin master
 cd ../..
-chmod +x install.sh
-./install.sh
+
+mv /ctre /usr/local/include
+mv /lib /usr/local/lib
 
 # Install ROS2
 locale
