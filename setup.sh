@@ -16,7 +16,7 @@ git pull origin master
 cd ../..
 
 sudo mv ./ctre /usr/local/include
-sudo mv ./lib/* /usr/local/lib/
+#sudo mv ./lib/* /usr/local/lib/
 
 # Install ROS2
 locale
@@ -44,3 +44,6 @@ sudo apt install ros-dev-tools
 
 echo "source /opt/ros/galactic/setup.bash" >> ~/.bashrc
 sudo apt-get install gazebo11
+
+sudo chmod +x install_gui_deps.sh
+./install_gui_deps

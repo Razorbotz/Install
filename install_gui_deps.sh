@@ -28,7 +28,8 @@ sudo apt-get install -y \
     libcurl4-openssl-dev \
     libgtkmm-3.0-dev \
     libwebkit2gtk-4.0-dev \
-    libsdl2-dev
+    libsdl2-dev \
+    libncurses-dev
 
 echo ""
 echo "All dependencies have been successfully installed."
