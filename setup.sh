@@ -7,13 +7,17 @@ cd SoftwareDevelopment/ROS2
 git init
 git remote add origin https://github.com/Razorbotz/ROS2
 git pull origin master
+git checkout testing
 cd ..
 mkdir C++
 cd C++
 git init
 git remote add origin https://github.com/Razorbotz/CPP
 git pull origin master
+git checkout testing
 cd ../..
+
+mv SoftwareDevelopment ../
 
 sudo mv ./ctre /usr/local/include
 sudo mv ./lib/x86_64/* /usr/local/lib/
@@ -46,4 +50,4 @@ echo "source /opt/ros/galactic/setup.bash" >> ~/.bashrc
 sudo apt-get install gazebo11
 
 sudo chmod +x install_gui_deps.sh
-./install_gui_deps
+./install_gui_deps.sh
