@@ -47,7 +47,10 @@ sudo apt install ros-galactic-desktop
 sudo apt install ros-dev-tools
 
 echo "source /opt/ros/galactic/setup.bash" >> ~/.bashrc
+echo "source ~/SoftwareDevelopment/C++/robotcontrollerclient/control_completion.sh" >> ~/.bashrc
+
 sudo apt-get install gazebo11
+sudo apt-get install canutils
 
 sudo chmod +x install_gui_deps.sh
 ./install_gui_deps.sh
