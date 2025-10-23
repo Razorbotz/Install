@@ -18,6 +18,8 @@ Navigate to the folder that was just downloaded and run the following commands t
 chmod +x setup_wsl.sh
 ```
 
+DO NOT RUN sudo ./setup_wsl.sh, it will cause some issues with your folder permissions. Run the script with normal permissions and enter the sudo password when prompted.
+
 ```
 ./setup_wsl.sh
 ```

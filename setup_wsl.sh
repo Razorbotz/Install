@@ -48,9 +48,10 @@ sudo apt install ros-dev-tools
 
 echo "source /opt/ros/galactic/setup.bash" >> ~/.bashrc
 echo "source ~/SoftwareDevelopment/C++/robotcontrollerclient/control_completion.sh" >> ~/.bashrc
+echo "sexport GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/team/SoftwareDevelopment/ROS2/shovel/src/sim/models" >> ~/.bashrc
 
 sudo apt-get install gazebo11
-sudo apt-get install canutils
+sudo apt install ros-galactic-gazebo-plugins
 
 sudo chmod +x install_gui_deps.sh
 ./install_gui_deps.sh
