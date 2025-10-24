@@ -6,15 +6,24 @@ mkdir SoftwareDevelopment/ROS2
 cd SoftwareDevelopment/ROS2
 git init
 git remote add origin https://github.com/Razorbotz/ROS2
-git pull origin master
-git checkout testing
+
+# Fetch all remote branches
+git fetch origin
+
+# Create and check out master locally
+git checkout -b master origin/master
+
+# Create and check out testing locally
+git checkout -b testing origin/testing
+
 cd ..
 mkdir C++
 cd C++
 git init
 git remote add origin https://github.com/Razorbotz/CPP
-git pull origin master
-git checkout testing
+git fetch origin
+git checkout -b master origin/master
+git checkout -b testing origin/testing
 cd ../..
 
 mv SoftwareDevelopment ../
@@ -48,7 +57,7 @@ sudo apt install ros-dev-tools
 
 echo "source /opt/ros/galactic/setup.bash" >> ~/.bashrc
 echo "source ~/SoftwareDevelopment/C++/robotcontrollerclient/control_completion.sh" >> ~/.bashrc
-echo "sexport GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/team/SoftwareDevelopment/ROS2/shovel/src/sim/models" >> ~/.bashrc
+echo "export GAZEBO_MODEL_PATH=/home/team/SoftwareDevelopment/ROS2/shovel/src/sim/models:$GAZEBO_MODEL_PATH" >> ~/.bashrc
 
 sudo apt-get install gazebo11
 sudo apt install ros-galactic-gazebo-plugins
