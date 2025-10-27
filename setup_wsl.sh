@@ -61,6 +61,7 @@ echo "export GAZEBO_MODEL_PATH=/home/team/SoftwareDevelopment/ROS2/shovel/src/si
 
 sudo apt-get install gazebo11
 sudo apt install ros-galactic-gazebo-plugins
+sudo apt install ros-galactic-rtabmap-ros
 
 sudo chmod +x install_gui_deps.sh
 ./install_gui_deps.sh
