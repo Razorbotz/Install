@@ -68,15 +68,68 @@ sudo apt-get install curl lsb-release gnupg
 sudo curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] https://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
 sudo apt-get update
-sudo apt-get install ignition-fortress
-
-sudo apt install -y ros-humble-gazebo-ros-pkgs ros-humble-gazebo-ros2-control
-
-sudo apt install ros-humble-ros-gz
-sudo apt install ros-humble-ros-gz-sim
-sudo apt install ros-humble-ros-gz-bridge
-sudo apt install ros-humble-rtabmap ros-humble-rtabmap-ros
-
 
 sudo chmod +x install_gui_deps.sh
 ./install_gui_deps.sh
+
+echo "============================================"
+echo " Building Gazebo 11 from source (Jammy/WSL) "
+echo "============================================"
+
+# --- Install dependencies ---
+sudo apt update
+sudo apt install -y \
+  build-essential cmake pkg-config \
+  python3 python3-dev python3-pip python3-numpy \
+  libprotoc-dev protobuf-compiler \
+  libqt5core5a libqt5gui5 libqt5opengl5 libqt5widgets5 qtbase5-dev \
+  libogre-1.9-dev libbullet-dev \
+  libboost-all-dev \
+  libtinyxml-dev libtinyxml2-dev \
+  libfreeimage-dev libprotoc-dev libprotobuf-dev protobuf-compiler \
+  libcurl4-openssl-dev libtbb-dev libgts-dev libusb-1.0-0-dev \
+  libxi-dev libxmu-dev libzip-dev libtar-dev \
+  libeigen3-dev freeglut3-dev doxygen \
+  git wget curl
+
+# --- Remove conflicting sdformat versions ---
+sudo apt remove -y 'libsdformat*' || true
+sudo apt install -y libsdformat9 libsdformat9-dev
+
+# --- Clone Gazebo 11 repo ---
+cd ~
+if [ -d "gazebo" ]; then
+  echo "[INFO] Removing existing ~/gazebo folder..."
+  rm -rf ~/gazebo
+fi
+
+git clone -b gazebo11 https://github.com/osrf/gazebo.git
+cd gazebo
+
+# --- Create build directory ---
+mkdir build && cd build
+
+# --- Configure with CMake ---
+cmake .. \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DENABLE_TESTS_COMPILATION:BOOL=False \
+  -DENABLE_PROFILER:BOOL=False
+
+# --- Build (use all cores) ---
+echo "[INFO] Building Gazebo (this can take a while)..."
+make -j$(nproc)
+
+# --- Install system-wide ---
+sudo make install
+
+# --- Source setup and verify ---
+if [ -f /usr/share/gazebo/setup.sh ]; then
+  source /usr/share/gazebo/setup.sh
+fi
+
+echo "============================================"
+gazebo --version || echo "Gazebo not in PATH yet."
+echo "============================================"
+echo "Gazebo 11 build completed successfully!"
+echo "You can now run: gazebo --verbose"
+echo "============================================"
