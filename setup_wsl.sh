@@ -71,12 +71,11 @@ sudo apt-get update
 sudo apt-get install ignition-fortress
 
 sudo apt install -y ros-humble-gazebo-ros-pkgs ros-humble-gazebo-ros2-control
-sudo apt install -y ros-humble-rtabmap-ros
 
-sudo apt install ros-humble-ros-gz-plugins
+sudo apt install ros-humble-ros-gz
 sudo apt install ros-humble-ros-gz-sim
 sudo apt install ros-humble-ros-gz-bridge
-sudo apt install ros-humble-rtabmap-gz
+sudo apt install ros-humble-rtabmap ros-humble-rtabmap-ros
 
 
 sudo chmod +x install_gui_deps.sh
