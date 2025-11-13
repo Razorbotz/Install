@@ -127,9 +127,30 @@ if [ -f /usr/share/gazebo/setup.sh ]; then
   source /usr/share/gazebo/setup.sh
 fi
 
+if ! grep -q "source /usr/share/gazebo/setup.sh" ~/.bashrc; then
+    echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
+fi
+
 echo "============================================"
 gazebo --version || echo "Gazebo not in PATH yet."
 echo "============================================"
 echo "Gazebo 11 build completed successfully!"
 echo "You can now run: gazebo --verbose"
 echo "============================================"
+
+
+mkdir -p ~/rtabmap_ws/src
+cd ~/rtabmap_ws/src
+
+git clone https://github.com/introlab/rtabmap.git
+git clone --branch ros2 https://github.com/introlab/rtabmap_ros.git
+
+cd ~/rtabmap_ws
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y
+
+echo "source ~/rtabmap_ws/install/setup.bash" >> ~/.bashrc
+
+echo "Building rtabmap sequentially to limit memory issues. This will take a while."
+MAKEFLAGS="-j1" colcon build --symlink-install \
+  --cmake-args -DCMAKE_BUILD_TYPE=Release -DWITH_ZED=OFF

@@ -87,3 +87,6 @@ Pin-Priority: 1001
 
 sudo apt update
 sudo apt install firefox
+
+sudo chmod +x install_camera_sdks.sh
+./install_camera_sdks.sh
