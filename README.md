@@ -1,7 +1,7 @@
 To install WSL, run the following command in a Command Prompt or Powershell:
 
 ```
-wsl --install Ubuntu-20.04
+wsl --install Ubuntu-22.04
 ```
 
 After the installation finishes, create a username and password. Start WSL and run the next commands in the virtual machine.
