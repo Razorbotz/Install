@@ -72,9 +72,8 @@ sudo apt-get update
 sudo chmod +x install_gui_deps.sh
 ./install_gui_deps.sh
 
-echo "============================================"
-echo " Building Gazebo 11 from source (Jammy/WSL) "
-echo "============================================"
+echo "Installing Gazebo 11 binaries..."
+sudo apt install -y gazebo libgazebo-dev
 
 # --- Install dependencies ---
 sudo apt update
@@ -92,54 +91,25 @@ sudo apt install -y \
   libeigen3-dev freeglut3-dev doxygen \
   git wget curl
 
-# --- Remove conflicting sdformat versions ---
-sudo apt remove -y 'libsdformat*' || true
-sudo apt install -y libsdformat9 libsdformat9-dev
+echo "[INFO] Installing Build Dependencies (OpenCV, GTK, FFmpeg, SDL2, WebKit)..."
+sudo apt install -y \
+    build-essential \
+    cmake \
+    pkg-config \
+    libopencv-dev \
+    python3-opencv \
+    libgtkmm-3.0-dev \
+    libsdl2-dev \
+    libcurl4-openssl-dev \
+    zlib1g-dev \
+    libcairo2-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libswscale-dev \
+    libwebkit2gtk-4.1-dev
 
-# --- Clone Gazebo 11 repo ---
-cd ~
-if [ -d "gazebo" ]; then
-  echo "[INFO] Removing existing ~/gazebo folder..."
-  rm -rf ~/gazebo
-fi
-
-git clone -b gazebo11 https://github.com/osrf/gazebo.git
-cd gazebo
-
-# --- Create build directory ---
-mkdir build && cd build
-
-# --- Configure with CMake ---
-cmake .. \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DENABLE_TESTS_COMPILATION:BOOL=False \
-  -DENABLE_PROFILER:BOOL=False
-
-# --- Build (use all cores) ---
-echo "[INFO] Building Gazebo (this can take a while)..."
-make -j$(nproc)
-
-# --- Install system-wide ---
-sudo make install
-
-# --- Source setup and verify ---
-if [ -f /usr/share/gazebo/setup.sh ]; then
-  source /usr/share/gazebo/setup.sh
-fi
-
-if ! grep -q "source /usr/share/gazebo/setup.sh" ~/.bashrc; then
-    echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
-fi
-
-echo "============================================"
-gazebo --version || echo "Gazebo not in PATH yet."
-echo "============================================"
-echo "Gazebo 11 build completed successfully!"
-echo "You can now run: gazebo --verbose"
-echo "============================================"
-
-
-cd ..\SoftwareDevelopment\C++\robotcontrolclient\
+cd ../SoftwareDevelopment/C++/robotcontrollerclient/
 mkdir build
 cd build
 cmake ..
@@ -147,3 +117,4 @@ make
 
 sudo apt install -y gazebo ros-humble-gazebo-ros-pkgs
 sudo apt install -y ros-humble-ros2-control ros-humble-ros2-controllers
+sudo apt install ros-humble-aruco-ros
