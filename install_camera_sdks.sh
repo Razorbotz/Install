@@ -15,6 +15,6 @@ sudo apt-get install librealsense2-dev
 realsense-viewer
 sudo rm /etc/apt/sources.list.d/archive_uri-https_librealsense_intel_com_debian_apt-repo-jammy.list
 sudo apt update
-wget https://download.stereolabs.com/zedsdk/5.1/l4t36.4/jetsons
+wget https://download.stereolabs.com/zedsdk/5.2/l4t36.4/jetsons
 chmod +x jetsons 
 ./jetsons 
