@@ -1,0 +1,12 @@
+[Unit]
+Description=Setup SocketCAN interfaces can0 and can1 with baudrate 1000000
+Requires=NetworkManager-wait-online.service
+After=NetworkManager-wait-online.service
+
+[Service]
+Type=oneshot
+ExecStat=/usr/local/bin/setup_can_gateway.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=network-online.target
