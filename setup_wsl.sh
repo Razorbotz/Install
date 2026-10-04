@@ -107,7 +107,8 @@ sudo apt install -y \
     libavformat-dev \
     libavutil-dev \
     libswscale-dev \
-    libwebkit2gtk-4.1-dev
+    libwebkit2gtk-4.1-dev \
+    ros-humble-foxglove-bridge
 
 cd ../SoftwareDevelopment/C++/robotcontrollerclient/
 mkdir build
