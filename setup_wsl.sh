@@ -108,6 +108,8 @@ sudo apt install -y \
     libavutil-dev \
     libswscale-dev \
     libwebkit2gtk-4.1-dev \
+    nlohmann-json3-dev \
+    libwebsocketpp-dev \
     ros-humble-foxglove-bridge
 
 cd ../SoftwareDevelopment/C++/robotcontrollerclient/
@@ -117,5 +119,15 @@ cmake ..
 make
 
 sudo apt install -y gazebo ros-humble-gazebo-ros-pkgs
-sudo apt install -y ros-humble-ros2-control ros-humble-ros2-controllers
+sudo apt install -y ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-vision-msgs
 sudo apt install ros-humble-aruco-ros
+sudo apt install ros-humble-gazebo-ros2-control ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-apriltag-ros
+
+source /opt/ros/humble/setup.bash
+
+export YEAR=2026
+sudo curl -s --compressed -o /usr/share/keyrings/ctr-pubkey.gpg "https://deb.ctr-electronics.com/ctr-pubkey.gpg"
+sudo curl -s --compressed -o /etc/apt/sources.list.d/ctr${YEAR}.list "https://deb.ctr-electronics.com/ctr${YEAR}.list"
+
+sudo apt update
+sudo apt install phoenix6
