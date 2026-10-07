@@ -131,3 +131,5 @@ sudo curl -s --compressed -o /etc/apt/sources.list.d/ctr${YEAR}.list "https://de
 
 sudo apt update
 sudo apt install phoenix6
+
+echo "Installation finished. Please run \"source /opt/ros/humble/setup.bash\" before building ROS2 codebase."
