@@ -1,32 +1,12 @@
 #!/bin/bash
 
 # Create folder directory of robot
-mkdir SoftwareDevelopment
-mkdir SoftwareDevelopment/ROS2
-cd SoftwareDevelopment/ROS2
-git init
-git remote add origin https://github.com/Razorbotz/ROS2
+git clone --recurse-submodules https://github.com/Razorbotz/RMC-Code-26-27 SoftwareDevelopment
 
-# Fetch all remote branches
-git fetch origin
+cd SoftwareDevelopment
 
-# Create and check out master locally
-git checkout -b master origin/master
-
-# Create and check out testing locally
-git checkout -b testing origin/testing
-
-cd ..
-mkdir C++
-cd C++
-git init
-git remote add origin https://github.com/Razorbotz/CPP
-git fetch origin
-git checkout -b master origin/master
-git checkout -b testing origin/testing
-cd ../..
-
-mv SoftwareDevelopment ../
+git submodule foreach 'git fetch origin'
+git submodule foreach 'git checkout testing'
 
 sudo mv ./ctre /usr/local/include
 sudo mv ./lib/x86_64/* /usr/local/lib/
@@ -132,4 +112,11 @@ sudo curl -s --compressed -o /etc/apt/sources.list.d/ctr${YEAR}.list "https://de
 sudo apt update
 sudo apt install phoenix6
 
+cd ~/SoftwareDevelopment/ROS2
+
+sudo rosdep init
+rosdep update
+rosdep install --from-paths . --ignore-src -r -y
+
 echo "Installation finished. Please run \"source /opt/ros/humble/setup.bash\" before building ROS2 codebase."
+
